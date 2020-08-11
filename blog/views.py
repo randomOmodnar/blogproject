@@ -1,14 +1,20 @@
 from django.shortcuts import render
-
-# Create your views here.
-
 from django.http import HttpResponse
+from .models import Post
 
 # def index(request):
 #     return HttpResponse('welcome to my blog!')
 
+# def index(request):
+#     return render(request,'blog/index.html',context={
+#         'title':'Home page of my blog',
+#         'welcome':'Welcome to my blog',
+#     })
+
+
 def index(request):
+    post_list = Post.objects.all().order_by('-created_time')
     return render(request,'blog/index.html',context={
-        'title':'Home page of my blog',
-        'welcome':'Welcome to my blog',
+        'post_list':post_list,
+        # 'static':'blog/static'
     })
