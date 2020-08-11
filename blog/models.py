@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
 
 class Category(models.Model):
     """分类"""
@@ -39,6 +40,8 @@ class Post(models.Model):
         self.modified_time = timezone.now()
         super().save(*args, **kwargs)
 
+    def get_absoulte_url(self):
+        return reverse('blog:detail',kwargs={'pk':self.pk})
 
     class Meta:
         verbose_name = '文章'
